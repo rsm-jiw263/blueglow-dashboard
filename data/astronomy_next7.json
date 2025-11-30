@@ -1,0 +1,185 @@
+{
+  "location": {
+    "name": "La Jolla",
+    "lat": 32.83,
+    "lon": -117.32
+  },
+  "computed_at": "2025-11-24T21:11:25.202821Z",
+  "forecast_days": [
+    {
+      "date": "2025-11-24T12:00:00",
+      "sun": {
+        "sunrise": "2025-11-24T14:28:16.837417+00:00",
+        "sunset": "2025-11-24T00:43:59.776879+00:00",
+        "noon": "2025-11-24T19:36:01+00:00"
+      },
+      "moon": {
+        "illumination": 0.291,
+        "phase_name": "Crescent",
+        "is_dark_night": true
+      },
+      "tide": {
+        "high_tide_times": [
+          "2025-11-24T00:00:00",
+          "2025-11-24T12:25:12"
+        ],
+        "low_tide_times": [
+          "2025-11-24T06:12:36",
+          "2025-11-24T18:37:48"
+        ],
+        "current_level": 0.821,
+        "near_low_tide": false
+      }
+    },
+    {
+      "date": "2025-11-25T12:00:00",
+      "sun": {
+        "sunrise": "2025-11-25T14:29:10.321960+00:00",
+        "sunset": "2025-11-25T00:43:41.961876+00:00",
+        "noon": "2025-11-25T19:36:19+00:00"
+      },
+      "moon": {
+        "illumination": 0.352,
+        "phase_name": "Crescent",
+        "is_dark_night": false
+      },
+      "tide": {
+        "high_tide_times": [
+          "2025-11-25T00:00:00",
+          "2025-11-25T12:25:12"
+        ],
+        "low_tide_times": [
+          "2025-11-25T06:12:36",
+          "2025-11-25T18:37:48"
+        ],
+        "current_level": 0.983,
+        "near_low_tide": false
+      }
+    },
+    {
+      "date": "2025-11-26T12:00:00",
+      "sun": {
+        "sunrise": "2025-11-26T14:30:03.480551+00:00",
+        "sunset": "2025-11-26T00:43:25.946825+00:00",
+        "noon": "2025-11-26T19:36:38+00:00"
+      },
+      "moon": {
+        "illumination": 0.414,
+        "phase_name": "Quarter",
+        "is_dark_night": false
+      },
+      "tide": {
+        "high_tide_times": [
+          "2025-11-26T00:00:00",
+          "2025-11-26T12:25:12"
+        ],
+        "low_tide_times": [
+          "2025-11-26T06:12:36",
+          "2025-11-26T18:37:48"
+        ],
+        "current_level": 0.971,
+        "near_low_tide": false
+      }
+    },
+    {
+      "date": "2025-11-27T12:00:00",
+      "sun": {
+        "sunrise": "2025-11-27T14:30:56.270523+00:00",
+        "sunset": "2025-11-27T00:43:11.741294+00:00",
+        "noon": "2025-11-27T19:36:58+00:00"
+      },
+      "moon": {
+        "illumination": 0.48,
+        "phase_name": "Quarter",
+        "is_dark_night": false
+      },
+      "tide": {
+        "high_tide_times": [
+          "2025-11-27T00:00:00",
+          "2025-11-27T12:25:12"
+        ],
+        "low_tide_times": [
+          "2025-11-27T06:12:36",
+          "2025-11-27T18:37:48"
+        ],
+        "current_level": 0.785,
+        "near_low_tide": false
+      }
+    },
+    {
+      "date": "2025-11-28T12:00:00",
+      "sun": {
+        "sunrise": "2025-11-28T14:31:48.648450+00:00",
+        "sunset": "2025-11-28T00:42:59.353492+00:00",
+        "noon": "2025-11-28T19:37:18+00:00"
+      },
+      "moon": {
+        "illumination": 0.547,
+        "phase_name": "Quarter",
+        "is_dark_night": false
+      },
+      "tide": {
+        "high_tide_times": [
+          "2025-11-28T00:00:00",
+          "2025-11-28T12:25:12"
+        ],
+        "low_tide_times": [
+          "2025-11-28T06:12:36",
+          "2025-11-28T18:37:48"
+        ],
+        "current_level": 0.46,
+        "near_low_tide": false
+      }
+    },
+    {
+      "date": "2025-11-29T12:00:00",
+      "sun": {
+        "sunrise": "2025-11-29T14:32:40.570221+00:00",
+        "sunset": "2025-11-29T00:42:48.790228+00:00",
+        "noon": "2025-11-29T19:37:39+00:00"
+      },
+      "moon": {
+        "illumination": 0.619,
+        "phase_name": "Gibbous",
+        "is_dark_night": false
+      },
+      "tide": {
+        "high_tide_times": [
+          "2025-11-29T00:00:00",
+          "2025-11-29T12:25:12"
+        ],
+        "low_tide_times": [
+          "2025-11-29T06:12:36",
+          "2025-11-29T18:37:48"
+        ],
+        "current_level": 0.053,
+        "near_low_tide": false
+      }
+    },
+    {
+      "date": "2025-11-30T12:00:00",
+      "sun": {
+        "sunrise": "2025-11-30T14:33:31.991121+00:00",
+        "sunset": "2025-11-30T00:42:40.056871+00:00",
+        "noon": "2025-11-30T19:38:01+00:00"
+      },
+      "moon": {
+        "illumination": 0.691,
+        "phase_name": "Gibbous",
+        "is_dark_night": false
+      },
+      "tide": {
+        "high_tide_times": [
+          "2025-11-30T00:00:00",
+          "2025-11-30T12:25:12"
+        ],
+        "low_tide_times": [
+          "2025-11-30T06:12:36",
+          "2025-11-30T18:37:48"
+        ],
+        "current_level": -0.363,
+        "near_low_tide": false
+      }
+    }
+  ]
+}

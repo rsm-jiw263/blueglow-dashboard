@@ -1,0 +1,191 @@
+{
+  "generated_at": "2025-11-25T20:21:45.822668Z",
+  "location": {
+    "name": "La Jolla Shores (Scripps Nearshore)",
+    "lat": 32.83,
+    "lon": -117.32
+  },
+  "model_version": "1.0-climatology",
+  "forecasts": [
+    {
+      "date": "2025-11-24",
+      "day_of_week": "Monday",
+      "score": 0,
+      "rating": "Poor",
+      "conditions": {
+        "moon": {
+          "phase": "Crescent",
+          "illumination": 0.291,
+          "dark_night": true
+        },
+        "tide": {
+          "level": 0.821,
+          "near_low_tide": false,
+          "low_tide_times": [
+            "2025-11-24T06:12:36",
+            "2025-11-24T18:37:48"
+          ]
+        },
+        "wave_height_m": 0.72,
+        "water_temp_c": 15.0
+      },
+      "recommendation": "Conditions are not ideal. Check back in a few days."
+    },
+    {
+      "date": "2025-11-25",
+      "day_of_week": "Tuesday",
+      "score": 0,
+      "rating": "Poor",
+      "conditions": {
+        "moon": {
+          "phase": "Crescent",
+          "illumination": 0.352,
+          "dark_night": false
+        },
+        "tide": {
+          "level": 0.983,
+          "near_low_tide": false,
+          "low_tide_times": [
+            "2025-11-25T06:12:36",
+            "2025-11-25T18:37:48"
+          ]
+        },
+        "wave_height_m": 0.71,
+        "water_temp_c": 15.1
+      },
+      "recommendation": "Conditions are not ideal. Check back in a few days."
+    },
+    {
+      "date": "2025-11-26",
+      "day_of_week": "Wednesday",
+      "score": 0,
+      "rating": "Poor",
+      "conditions": {
+        "moon": {
+          "phase": "Quarter",
+          "illumination": 0.414,
+          "dark_night": false
+        },
+        "tide": {
+          "level": 0.971,
+          "near_low_tide": false,
+          "low_tide_times": [
+            "2025-11-26T06:12:36",
+            "2025-11-26T18:37:48"
+          ]
+        },
+        "wave_height_m": 0.62,
+        "water_temp_c": 15.1
+      },
+      "recommendation": "Conditions are not ideal. Check back in a few days."
+    },
+    {
+      "date": "2025-11-27",
+      "day_of_week": "Thursday",
+      "score": 0,
+      "rating": "Poor",
+      "conditions": {
+        "moon": {
+          "phase": "Quarter",
+          "illumination": 0.48,
+          "dark_night": false
+        },
+        "tide": {
+          "level": 0.785,
+          "near_low_tide": false,
+          "low_tide_times": [
+            "2025-11-27T06:12:36",
+            "2025-11-27T18:37:48"
+          ]
+        },
+        "wave_height_m": 0.53,
+        "water_temp_c": 15.2
+      },
+      "recommendation": "Conditions are not ideal. Check back in a few days."
+    },
+    {
+      "date": "2025-11-28",
+      "day_of_week": "Friday",
+      "score": 0,
+      "rating": "Poor",
+      "conditions": {
+        "moon": {
+          "phase": "Quarter",
+          "illumination": 0.547,
+          "dark_night": false
+        },
+        "tide": {
+          "level": 0.46,
+          "near_low_tide": false,
+          "low_tide_times": [
+            "2025-11-28T06:12:36",
+            "2025-11-28T18:37:48"
+          ]
+        },
+        "wave_height_m": 0.48,
+        "water_temp_c": 15.1
+      },
+      "recommendation": "Poor conditions due to bright moonlight. Try a darker night."
+    },
+    {
+      "date": "2025-11-29",
+      "day_of_week": "Saturday",
+      "score": 0,
+      "rating": "Poor",
+      "conditions": {
+        "moon": {
+          "phase": "Gibbous",
+          "illumination": 0.619,
+          "dark_night": false
+        },
+        "tide": {
+          "level": 0.053,
+          "near_low_tide": false,
+          "low_tide_times": [
+            "2025-11-29T06:12:36",
+            "2025-11-29T18:37:48"
+          ]
+        },
+        "wave_height_m": 0.43,
+        "water_temp_c": 15.0
+      },
+      "recommendation": "Poor conditions due to bright moonlight. Try a darker night."
+    },
+    {
+      "date": "2025-11-30",
+      "day_of_week": "Sunday",
+      "score": 0,
+      "rating": "Poor",
+      "conditions": {
+        "moon": {
+          "phase": "Gibbous",
+          "illumination": 0.691,
+          "dark_night": false
+        },
+        "tide": {
+          "level": -0.363,
+          "near_low_tide": false,
+          "low_tide_times": [
+            "2025-11-30T06:12:36",
+            "2025-11-30T18:37:48"
+          ]
+        },
+        "wave_height_m": 0.41,
+        "water_temp_c": 14.4
+      },
+      "recommendation": "Poor conditions due to bright moonlight. Try a darker night."
+    }
+  ],
+  "metadata": {
+    "note": "Forecast based on climatology + astronomy. Will improve with real-time SST/Chl-a data.",
+    "features_used": [
+      "moon_illumination",
+      "is_night",
+      "tide_level",
+      "wave_height",
+      "water_temp",
+      "season_sin"
+    ],
+    "weak_supervision": true
+  }
+}

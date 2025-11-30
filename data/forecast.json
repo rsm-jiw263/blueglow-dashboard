@@ -1,0 +1,69 @@
+{
+  "generated_at": "2025-11-24T12:01:57.493345",
+  "location": "Demo Location",
+  "forecast": [
+    {
+      "date": "2025-11-24",
+      "day_name": "Monday",
+      "blueglow_index": 7.5,
+      "quality": "Excellent",
+      "cloud_cover": 86.7,
+      "visibility": 19.2,
+      "moon_phase": 16.8
+    },
+    {
+      "date": "2025-11-25",
+      "day_name": "Tuesday",
+      "blueglow_index": 7.2,
+      "quality": "Excellent",
+      "cloud_cover": 12.6,
+      "visibility": 45.3,
+      "moon_phase": 44.4
+    },
+    {
+      "date": "2025-11-26",
+      "day_name": "Wednesday",
+      "blueglow_index": 8.4,
+      "quality": "Excellent",
+      "cloud_cover": 88.5,
+      "visibility": 47.0,
+      "moon_phase": 6.4
+    },
+    {
+      "date": "2025-11-27",
+      "day_name": "Thursday",
+      "blueglow_index": 3.2,
+      "quality": "Fair",
+      "cloud_cover": 3.5,
+      "visibility": 48.7,
+      "moon_phase": 66.7
+    },
+    {
+      "date": "2025-11-28",
+      "day_name": "Friday",
+      "blueglow_index": 8.6,
+      "quality": "Excellent",
+      "cloud_cover": 97.2,
+      "visibility": 40.3,
+      "moon_phase": 59.9
+    },
+    {
+      "date": "2025-11-29",
+      "day_name": "Saturday",
+      "blueglow_index": 8.6,
+      "quality": "Excellent",
+      "cloud_cover": 45.2,
+      "visibility": 15.7,
+      "moon_phase": 87.1
+    },
+    {
+      "date": "2025-11-30",
+      "day_name": "Sunday",
+      "blueglow_index": 3.3,
+      "quality": "Fair",
+      "cloud_cover": 51.5,
+      "visibility": 9.9,
+      "moon_phase": 10.6
+    }
+  ]
+}

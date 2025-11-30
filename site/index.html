@@ -1,0 +1,835 @@
+<!DOCTYPE html>
+<html lang="en" translate="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="google" content="notranslate">
+    <meta name="description" content="Bioluminescence forecast for La Jolla Shores - Find the best time to see blue tears">
+    <meta name="theme-color" content="#667eea">
+    <link rel="manifest" href="/manifest.json">
+    <title>La Jolla Blue Tears Forecast</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            color: white;
+            margin-bottom: 30px;
+        }
+
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            font-size: 1.2em;
+            opacity: 0.9;
+            margin-bottom: 20px;
+        }
+
+        .date-selector {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+
+        .date-selector label {
+            font-size: 1em;
+            font-weight: 600;
+        }
+
+        .date-selector input {
+            padding: 10px 15px;
+            border-radius: 8px;
+            border: none;
+            font-size: 1em;
+        }
+
+        .date-selector button {
+            padding: 10px 20px;
+            border-radius: 8px;
+            border: none;
+            font-size: 1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        #query-btn {
+            background: #3498db;
+            color: white;
+        }
+
+        #query-btn:hover {
+            background: #2980b9;
+        }
+
+        #best-week-btn {
+            background: #27ae60;
+            color: white;
+        }
+
+        #best-week-btn:hover {
+            background: #229954;
+        }
+
+        .info-section {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .info-section h2 {
+            color: #667eea;
+            margin-bottom: 10px;
+            font-size: 1.3em;
+        }
+
+        .info-section p {
+            color: #2c3e50;
+            line-height: 1.6;
+        }
+
+        .timestamp {
+            color: #666;
+            font-size: 0.9em;
+            margin-top: 10px;
+        }
+
+        .score-legend {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .score-legend h3 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-size: 1.1em;
+            font-weight: 600;
+        }
+
+        .legend-items {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 12px;
+        }
+
+        .legend-item {
+            display: flex;
+            flex-direction: column;
+            padding: 12px 16px;
+            border-radius: 6px;
+            border-left: 4px solid;
+        }
+
+        .legend-item.excellent {
+            background: #d4edda;
+            border-left-color: #28a745;
+        }
+
+        .legend-item.good {
+            background: #d1ecf1;
+            border-left-color: #17a2b8;
+        }
+
+        .legend-item.fair {
+            background: #fff3cd;
+            border-left-color: #ffc107;
+        }
+
+        .legend-item.poor {
+            background: #f8d7da;
+            border-left-color: #dc3545;
+        }
+
+        .legend-label {
+            font-size: 0.95em;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 4px;
+        }
+
+        .legend-range {
+            font-size: 0.85em;
+            color: #555;
+            line-height: 1.3;
+        }
+
+        footer {
+            text-align: center;
+            color: white;
+            margin-top: 30px;
+            padding: 20px;
+            opacity: 0.9;
+        }
+
+        footer p {
+            margin: 5px 0;
+            line-height: 1.6;
+        }
+
+        footer small {
+            font-size: 0.85em;
+        }
+
+        .card {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 600px;
+            margin: 0 auto;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .day-name {
+            font-size: 2.5em;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 5px;
+        }
+
+        .date {
+            font-size: 1.2em;
+            color: #7f8c8d;
+            margin-bottom: 30px;
+        }
+
+        .score-section {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .score-value {
+            font-size: 5em;
+            font-weight: bold;
+            color: #667eea;
+            line-height: 1;
+        }
+
+        .score-label {
+            font-size: 1.1em;
+            color: #7f8c8d;
+            margin-top: 10px;
+        }
+
+        .rating-badge {
+            background: #27ae60;
+            color: white;
+            font-size: 1.5em;
+            font-weight: 600;
+            padding: 15px 30px;
+            border-radius: 12px;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .conditions {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 30px;
+        }
+
+        .condition-item {
+            display: flex;
+            align-items: center;
+            font-size: 1.1em;
+            color: #2c3e50;
+        }
+
+        .condition-icon {
+            font-size: 1.4em;
+            margin-right: 10px;
+            width: 30px;
+        }
+
+        .timeslots-section {
+            border-top: 2px solid #ecf0f1;
+            padding-top: 20px;
+        }
+
+        .timeslots-title {
+            font-size: 1em;
+            color: #7f8c8d;
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+
+        .timeslots-container {
+            display: flex;
+            gap: 8px;
+            overflow-x: auto;
+            padding-bottom: 10px;
+        }
+
+        .timeslots-container::-webkit-scrollbar {
+            height: 6px;
+        }
+
+        .timeslots-container::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 3px;
+        }
+
+        .timeslots-container::-webkit-scrollbar-thumb {
+            background: #bdc3c7;
+            border-radius: 3px;
+        }
+
+        .timeslot {
+            flex-shrink: 0;
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 12px 16px;
+            min-width: 100px;
+            text-align: center;
+            border: 2px solid transparent;
+            transition: all 0.2s;
+        }
+
+        .timeslot.night {
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            color: white;
+        }
+
+        .timeslot.day {
+            background: linear-gradient(135deg, #f39c12 0%, #f1c40f 100%);
+            color: #2c3e50;
+        }
+
+        .timeslot.best {
+            border: 2px solid #e74c3c;
+            box-shadow: 0 0 8px rgba(231, 76, 60, 0.4);
+        }
+
+        .timeslot:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+        }
+
+        .timeslot-time {
+            font-weight: bold;
+            font-size: 0.95em;
+            margin-bottom: 6px;
+        }
+
+        .timeslot-score {
+            font-size: 1.3em;
+            font-weight: bold;
+            margin-bottom: 4px;
+        }
+
+        .timeslot-icons {
+            font-size: 0.9em;
+            opacity: 0.9;
+        }
+
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .nav-btn {
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 10px 20px;
+            font-size: 1em;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-weight: 600;
+        }
+
+        .nav-btn:hover {
+            background: #5568d3;
+            transform: scale(1.05);
+        }
+
+        .nav-btn:disabled {
+            background: #bdc3c7;
+            cursor: not-allowed;
+            transform: scale(1);
+        }
+
+        .day-indicator {
+            font-size: 0.9em;
+            color: #7f8c8d;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🌊✨ La Jolla Blue Tears Forecast</h1>
+            <p class="subtitle">7-Day Viewing Conditions</p>
+
+            <!-- Date Selector -->
+            <div class="date-selector">
+                <label for="start-date">Select Start Date:</label>
+                <input type="date" id="start-date" />
+                <button id="query-btn" onclick="queryForecast()">Query Forecast</button>
+                <button id="best-week-btn" onclick="loadBestWeek()">Show Best Week</button>
+            </div>
+        </header>
+
+        <!-- Location Info -->
+        <section class="info-section">
+            <h2>📍 Location</h2>
+            <p id="location-info">Loading...</p>
+            <p class="timestamp" id="timestamp">Loading...</p>
+        </section>
+
+        <!-- Score Legend -->
+        <section class="score-legend">
+            <h3>📊 Index Description</h3>
+            <div class="legend-items">
+                <div class="legend-item excellent">
+                    <span class="legend-label">Excellent</span>
+                    <span class="legend-range">7-10: Ideal viewing conditions</span>
+                </div>
+                <div class="legend-item good">
+                    <span class="legend-label">Good</span>
+                    <span class="legend-range">5-7: Suitable for viewing</span>
+                </div>
+                <div class="legend-item fair">
+                    <span class="legend-label">Fair</span>
+                    <span class="legend-range">3-5: Possible to try</span>
+                </div>
+                <div class="legend-item poor">
+                    <span class="legend-label">Poor</span>
+                    <span class="legend-range">0-3: Not recommended</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Forecast Card -->
+        <div class="card">
+        <div class="navigation">
+            <button class="nav-btn" id="prev-btn" onclick="previousDay()">← Previous</button>
+            <div class="day-indicator" id="day-indicator">Day 1 of 7</div>
+            <button class="nav-btn" id="next-btn" onclick="nextDay()">Next →</button>
+        </div>
+        <div class="day-name">Monday</div>
+        <div class="date">2025-11-24</div>
+
+        <div class="score-section">
+            <div class="score-value">7.5</div>
+            <div class="score-label">BlueGlow Index</div>
+        </div>
+
+        <div class="rating-badge">Excellent</div>
+
+        <div class="conditions">
+            <div class="condition-item">
+                <span class="condition-icon">☁️</span>
+                <span>Cloud: 86.7%</span>
+            </div>
+            <div class="condition-item">
+                <span class="condition-icon">👁️</span>
+                <span>Visibility: 19.2 km</span>
+            </div>
+            <div class="condition-item">
+                <span class="condition-icon">🌙</span>
+                <span>Moon Phase: 16.8%</span>
+            </div>
+        </div>
+
+        <div class="timeslots-section">
+            <div class="timeslots-title">📅 Today's Forecast</div>
+            <div class="timeslots-container">
+                <div class="timeslot night best">
+                    <div class="timeslot-time">00:00</div>
+                    <div class="timeslot-score">9.4</div>
+                    <div class="timeslot-icons">🌙⬇️</div>
+                </div>
+                <div class="timeslot night">
+                    <div class="timeslot-time">03:00</div>
+                    <div class="timeslot-score">8.7</div>
+                    <div class="timeslot-icons">🌙⬆️</div>
+                </div>
+                <div class="timeslot night">
+                    <div class="timeslot-time">06:00</div>
+                    <div class="timeslot-score">7.2</div>
+                    <div class="timeslot-icons">🌙⬇️</div>
+                </div>
+                <div class="timeslot day">
+                    <div class="timeslot-time">09:00</div>
+                    <div class="timeslot-score">4.5</div>
+                    <div class="timeslot-icons">☀️⬆️</div>
+                </div>
+                <div class="timeslot day">
+                    <div class="timeslot-time">12:00</div>
+                    <div class="timeslot-score">3.2</div>
+                    <div class="timeslot-icons">☀️⬇️</div>
+                </div>
+                <div class="timeslot day">
+                    <div class="timeslot-time">15:00</div>
+                    <div class="timeslot-score">2.8</div>
+                    <div class="timeslot-icons">☀️⬆️</div>
+                </div>
+                <div class="timeslot day">
+                    <div class="timeslot-time">18:00</div>
+                    <div class="timeslot-score">5.1</div>
+                    <div class="timeslot-icons">☀️⬇️</div>
+                </div>
+                <div class="timeslot night">
+                    <div class="timeslot-time">21:00</div>
+                    <div class="timeslot-score">8.3</div>
+                    <div class="timeslot-icons">🌙⬆️</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>BlueGlow Forecast System v1.0-climatology | Based on Climatology + Astronomy + Machine Learning</p>
+        <p><small>Data Source: NDBC Station 46254 | Astronomy: Astral | Model: Logistic Regression</small></p>
+    </footer>
+
+    <script>
+        let forecastData = null;
+        let currentDayIndex = 0;
+        let yearData = null; // Store the full year data
+
+        // Set date selector default value to data start date
+        document.addEventListener('DOMContentLoaded', function() {
+            // Set today's date as default
+            const today = new Date();
+            const dateStr = today.toISOString().split('T')[0];
+            document.getElementById('start-date').value = dateStr;
+            
+            // Set min/max dates - allow up to 1 year in the future
+            document.getElementById('start-date').min = dateStr;
+            const maxDate = new Date(today);
+            maxDate.setFullYear(maxDate.getFullYear() + 1);
+            document.getElementById('start-date').max = maxDate.toISOString().split('T')[0];
+            
+            // Load year data on page load
+            loadYearData();
+        });
+
+        // Load the full year data
+        async function loadYearData() {
+            try {
+                const response = await fetch('forecast_year.json');
+                if (!response.ok) {
+                    throw new Error(`Failed to load: ${response.status}`);
+                }
+                yearData = await response.json();
+                
+                // Show best week by default
+                loadBestWeek();
+            } catch (error) {
+                console.error('Failed to load year data:', error);
+                alert('Failed to load forecast data. Please refresh the page.');
+            }
+        }
+
+        // Query forecast from offline data
+        async function queryForecast() {
+            const dateInput = document.getElementById('start-date');
+            const selectedDate = dateInput.value;
+            
+            if (!selectedDate) {
+                alert('Please select a date first');
+                return;
+            }
+            
+            if (!yearData) {
+                alert('Data is still loading. Please wait...');
+                return;
+            }
+            
+            try {
+                // Find the selected date in year data
+                const dateIndex = yearData.forecasts.findIndex(f => f.date === selectedDate);
+                
+                if (dateIndex === -1) {
+                    throw new Error(`No data available for ${selectedDate}`);
+                }
+                
+                // Get 7 days starting from selected date
+                const weekData = yearData.forecasts.slice(dateIndex, dateIndex + 7);
+                
+                if (weekData.length === 0) {
+                    throw new Error('Not enough data for a full week');
+                }
+                
+                forecastData = weekData;
+                currentDayIndex = 0;
+                
+                // Update location info with date range
+                updateLocationInfo({
+                    ...yearData,
+                    forecasts: weekData
+                });
+                
+                updateCard(forecastData[currentDayIndex]);
+                updateNavigation();
+                
+                console.log(`Loaded ${weekData.length} days starting from ${selectedDate}`);
+            } catch (error) {
+                console.error('Failed to query forecast:', error);
+                alert(`Failed to load forecast: ${error.message}`);
+            }
+        }
+
+        // Load best week from year data or fallback to detailed file
+        async function loadBestWeek() {
+            console.log('Loading best week data...');
+            
+            try {
+                // Try to use year data if available
+                if (yearData && yearData.forecasts) {
+                    console.log('Using year data to find best week...');
+                    
+                    // Find the week with highest PEAK scores (not average)
+                    // Logic: A good day is one with at least one excellent timeslot
+                    let bestWeekStart = 0;
+                    let bestWeekScore = 0;
+                    
+                    // Check every possible 7-day window
+                    for (let i = 0; i <= yearData.forecasts.length - 7; i++) {
+                        const weekSlice = yearData.forecasts.slice(i, i + 7);
+                        
+                        // Calculate week score based on BEST timeslot of each day
+                        // (not average of all timeslots)
+                        const weekScore = weekSlice.reduce((sum, day) => {
+                            // Find the highest scoring timeslot in this day
+                            const dayMaxScore = Math.max(...day.timeslots.map(slot => slot.score));
+                            return sum + dayMaxScore;
+                        }, 0) / 7;
+                        
+                        if (weekScore > bestWeekScore) {
+                            bestWeekScore = weekScore;
+                            bestWeekStart = i;
+                        }
+                    }
+                    
+                    forecastData = yearData.forecasts.slice(bestWeekStart, bestWeekStart + 7);
+                    currentDayIndex = 0;
+                    
+                    console.log(`Best week: ${forecastData[0].date}, peak avg score: ${bestWeekScore.toFixed(1)}`);
+                    
+                    updateLocationInfo({
+                        ...yearData,
+                        forecasts: forecastData
+                    });
+                    
+                    updateCard(forecastData[currentDayIndex]);
+                    updateNavigation();
+                    return;
+                }
+                
+                // Fallback to forecast_detailed.json
+                const response = await fetch('forecast_detailed.json');
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+
+                const data = await response.json();
+
+                if (data.forecasts && data.forecasts.length > 0) {
+                    forecastData = data.forecasts;
+                    currentDayIndex = 0;
+
+                    updateLocationInfo(data);
+                    updateCard(forecastData[currentDayIndex]);
+                    updateNavigation();
+                } else {
+                    throw new Error('No forecasts in data');
+                }
+            } catch (error) {
+                console.error('Failed to load best week:', error);
+                alert('Failed to load best week data. Please try again.');
+            }
+        }
+
+        function updateLocationInfo(data) {
+            const locationEl = document.getElementById('location-info');
+            const timestampEl = document.getElementById('timestamp');
+
+            if (locationEl && data.location) {
+                locationEl.textContent = `${data.location.name} (${data.location.lat.toFixed(2)}°N, ${Math.abs(data.location.lon).toFixed(2)}°W)`;
+            }
+
+            if (timestampEl && data.generated_at) {
+                const date = new Date(data.generated_at);
+                const formatted = date.toLocaleString('en-US', {
+                    year: 'numeric',
+                    month: '2-digit',
+                    day: '2-digit',
+                    hour: '2-digit',
+                    minute: '2-digit'
+                });
+
+                // Calculate date range if available
+                let dateRange = '';
+                if (data.forecasts && data.forecasts.length > 0) {
+                    const startDate = data.forecasts[0].date;
+                    const endDate = data.forecasts[data.forecasts.length - 1].date;
+                    dateRange = ` | Showing: ${startDate} to ${endDate}`;
+                }
+
+                timestampEl.textContent = `Updated: ${formatted}${dateRange} | Mode: 3-hour timeslots | ${data.model_version || '1.0-climatology'}`;
+
+                // Update date input to match loaded data
+                if (data.forecasts && data.forecasts.length > 0) {
+                    document.getElementById('start-date').value = data.forecasts[0].date;
+                }
+            }
+        }
+
+        function previousDay() {
+            if (currentDayIndex > 0) {
+                currentDayIndex--;
+                updateCard(forecastData[currentDayIndex]);
+                updateNavigation();
+            }
+        }
+
+        function nextDay() {
+            if (currentDayIndex < forecastData.length - 1) {
+                currentDayIndex++;
+                updateCard(forecastData[currentDayIndex]);
+                updateNavigation();
+            }
+        }
+
+        function updateNavigation() {
+            const prevBtn = document.getElementById('prev-btn');
+            const nextBtn = document.getElementById('next-btn');
+            const indicator = document.getElementById('day-indicator');
+
+            // Safety checks
+            if (!prevBtn || !nextBtn || !indicator) {
+                console.error('Navigation elements not found');
+                return;
+            }
+
+            prevBtn.disabled = currentDayIndex === 0;
+            nextBtn.disabled = currentDayIndex === forecastData.length - 1;
+            indicator.textContent = `Day ${currentDayIndex + 1} of ${forecastData.length}`;
+        }
+
+        function updateCard(forecast) {
+            if (!forecast) return;
+            
+            try {
+                // Update basic info
+                const dayName = document.querySelector('.day-name');
+                const date = document.querySelector('.date');
+                const scoreValue = document.querySelector('.score-value');
+                const badge = document.querySelector('.rating-badge');
+                const conditions = document.querySelector('.conditions');
+                const container = document.querySelector('.timeslots-container');
+                
+                if (!dayName || !date || !scoreValue || !badge || !conditions || !container) {
+                    console.error('Missing DOM elements');
+                    return;
+                }
+                
+                dayName.textContent = forecast.day_of_week;
+                date.textContent = forecast.date;
+
+                // Use PEAK score (best timeslot) instead of average
+                // This represents the best viewing opportunity of the day
+                const peakScore = Math.max(...forecast.timeslots.map(slot => slot.score));
+                const displayScore = (peakScore / 10).toFixed(1);
+                scoreValue.textContent = displayScore;
+
+                // Update rating badge based on peak score
+                const rating = getRating(displayScore);
+                badge.textContent = rating.label;
+                badge.style.background = rating.color;
+
+                // Update conditions
+                const firstSlot = forecast.timeslots[0];
+                const slotConditions = firstSlot.conditions;
+
+                conditions.innerHTML = `
+                    <div class="condition-item">
+                        <span class="condition-icon">🌊</span>
+                        <span>Wave Height: ${slotConditions.wave_height_m}m</span>
+                    </div>
+                    <div class="condition-item">
+                        <span class="condition-icon">🌡️</span>
+                        <span>Water Temp: ${slotConditions.water_temp_c}°C</span>
+                    </div>
+                    <div class="condition-item">
+                        <span class="condition-icon">🌙</span>
+                        <span>Moon: ${(slotConditions.moon_illumination * 100).toFixed(1)}%</span>
+                    </div>
+                `;
+
+                // Update timeslots
+                container.innerHTML = forecast.timeslots.map(slot => {
+                    const score = (slot.score / 10).toFixed(1);
+                    const isBest = slot.time === forecast.best_time;
+                    const isNight = slot.is_night;
+
+                    return `
+                        <div class="timeslot ${isNight ? 'night' : 'day'} ${isBest ? 'best' : ''}">
+                            <div class="timeslot-time">${slot.time}</div>
+                            <div class="timeslot-score">${score}</div>
+                            <div class="timeslot-icons">
+                                ${isNight ? '🌙' : '☀️'}${slot.conditions.tide_level > 0 ? '⬆️' : '⬇️'}
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+            } catch (error) {
+                console.error('Error updating card:', error);
+            }
+        }
+
+        function getRating(score) {
+            if (score >= 7) return { label: 'Excellent', color: '#27ae60' };
+            if (score >= 5) return { label: 'Good', color: '#3498db' };
+            if (score >= 3) return { label: 'Fair', color: '#f39c12' };
+            return { label: 'Poor', color: '#e74c3c' };
+        }
+
+        // Load on page load
+        // Removed - now called on DOMContentLoaded
+
+        // Register Service Worker for offline support
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js')
+                    .then(registration => console.log('SW registered:', registration.scope))
+                    .catch(error => console.log('SW registration failed:', error));
+            });
+        }
+    </script>
+</body>
+</html>
