@@ -781,7 +781,7 @@ st.markdown("---")
 st.markdown("""
 <div style='text-align: center; color: #6b7280; padding: 2rem;'>
     <p>La Jolla Blue Tears Feasibility Dashboard</p>
-    <p>MGTA 452 Business Analytics | 2024</p>
+    <p>MGTA 452 Business Analytics | 2025</p>
     <p>Powered by Streamlit</p>
 </div>
 """, unsafe_allow_html=True)
